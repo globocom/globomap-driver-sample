@@ -1,0 +1,39 @@
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    sha: v0.9.1
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: autopep8-wrapper
+        args:
+        - -i
+        - --ignore=E501
+    -   id: check-docstring-first
+    -   id: check-json
+    -   id: pretty-format-json
+        args:
+        - --autofix
+    -   id: check-added-large-files
+    -   id: check-yaml
+    -   id: debug-statements
+    -   id: requirements-txt-fixer
+    -   id: double-quote-string-fixer
+    -   id: check-merge-conflict
+    -   id: check-ast
+    -   id: flake8
+        args:
+        - '-'
+        - --ignore=E501,E402,F401,F403,F405,F821,F841
+-   repo: https://github.com/pre-commit/pre-commit
+    sha: v0.15.4
+    hooks:
+    -   id: validate_config
+    -   id: validate_manifest
+-   repo: https://github.com/asottile/reorder_python_imports
+    sha: v0.3.5
+    hooks:
+    -   id: reorder-python-imports
+        language_version: python2.7
+-   repo: https://github.com/pre-commit/mirrors-autopep8
+    sha: v1.3.2
+    hooks:
+    -   id: autopep8
