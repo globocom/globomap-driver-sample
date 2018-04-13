@@ -14,18 +14,13 @@
    limitations under the License.
 """
 # !/usr/bin/env python
-import logging
-import sys
+from logging import config
 
 from globomap_driver_sample.loader import Loader
+from globomap_driver_sample.settings import LOGGING
 
 if __name__ == '__main__':
-    logging.basicConfig(
-        level=logging.WARNING,
-        filename='/tmp/loader.log',
-        format='%(asctime)s %(threadName)s %(levelname)s %(message)s',
-        # stream=sys.stdout
-    )
+    config.dictConfig(LOGGING)
 
     inst_loader = Loader()
-    inst_loader.run(1)
+    inst_loader.run()

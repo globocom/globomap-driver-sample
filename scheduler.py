@@ -1,5 +1,5 @@
 """
-   Copyright 2017 Globo.com
+   Copyright 2018 Globo.com
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -14,12 +14,12 @@
    limitations under the License.
 """
 # !/usr/bin/env python
-import logging
-import sys
+from logging import config
 
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 from globomap_driver_sample.loader import Loader
+from globomap_driver_sample.settings import LOGGING
 from globomap_driver_sample.settings import SCHEDULER_FREQUENCY_EXEC
 
 sched = BlockingScheduler()
@@ -27,14 +27,10 @@ sched = BlockingScheduler()
 
 @sched.scheduled_job('cron', day_of_week='0-6', hour=SCHEDULER_FREQUENCY_EXEC)
 def run_loader():
-    logging.basicConfig(
-        level=logging.WARNING,
-        format='%(asctime)s %(threadName)s %(levelname)s %(message)s',
-        stream=sys.stdout
-    )
+    config.dictConfig(LOGGING)
 
     inst_loader = Loader()
-    inst_loader.run(10)
+    inst_loader.run()
 
 
 if __name__ == '__main__':
