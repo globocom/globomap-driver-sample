@@ -38,7 +38,7 @@ class Loader(object):
             username=settings.GLOBOMAP_LOADER_USERNAME,
             password=settings.GLOBOMAP_LOADER_PASSWORD
         )
-        self.update = Update(auth=auth_inst, driver_name='zabbix')
+        self.update = Update(auth=auth_inst, driver_name='')
 
     def send(self, data):
         try:
