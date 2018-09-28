@@ -19,8 +19,8 @@ clean: ## Clear *.pyc files, etc
 tests: clean ## Make tests
 	@nosetests --verbose --rednose  --nocapture --cover-package=globomap_driver_sample --with-coverage; coverage report -m
 
-deploy: ## Make deploy
-	@tsuru app-deploy -a $(project) globomap_driver_sample Procfile requirements.txt scheduler.py run_loader.py .python-version
+tests_ci: clean ## Make tests to CI
+	@nosetests --verbose --rednose  --nocapture --cover-package=globomap_driver_sample
 
 clone:
 	@mkdir /tmp/bk; cd ../; cp -R globomap-driver-sample/ /tmp/bk/; cd /tmp/bk; mv globomap_driver_sample $(package); rm -rf .git/; sed -i .bak "s/globomap_driver_sample/$(package)/g" ./scheduler.py; sed -i .bak "s/globomap_driver_sample/$(package)/g" ./run_loader.py; sed -i .bak "s/globomap_driver_sample/$(package)/g" Makefile; sed -i .bak 's/Makefile for globomap-driver-sample/Makefile for $(package)/g' Makefile; rm -rf *.bak;
