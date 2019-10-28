@@ -14,4 +14,7 @@ All of the environment variables below must be set for the plugin to work proper
 | ZBX_PASSIVE_MONITOR_SCHEDULER  | Zabbix monitor               | passive_abc_monitor_scheduler              |
 
 ## Cloning to your own driver project
-To start working on your own Globomap Driver, user `make clone package=<package_name> project=<project-name>`. This will create the "project-name" repository in the same level as this project's repository.
+To start working on your own Globomap Driver, use `make clone package=<package_name> project=<project-name>`. This will create the "project-name" repository in the same level as this project's repository.
+
+## Formatting the data
+In the [driver.py](globomap_driver_sample/driver.py) file, you can retrieve data from any source you need and format it into a payload. There, you can use the given internal methods to do so, as well as to make requests to retrieve said data. Remember to change all instances of "sample" in it to names that make sense for your service and the data it's mapping.
