@@ -24,9 +24,10 @@ from globomap_driver_sample.settings import LOGGING
 from globomap_driver_sample.settings import SCHEDULER_FREQUENCY_EXEC
 
 sched = BlockingScheduler()
+frequency_exec = SCHEDULER_FREQUENCY_EXEC.split('|')
 
 
-@sched.scheduled_job('cron', day_of_week='0-6', hour=SCHEDULER_FREQUENCY_EXEC)
+@sched.scheduled_job('cron', day_of_week=frequency_exec[0], hour=frequency_exec[1])
 def run_loader():
     config.dictConfig(LOGGING)
 
