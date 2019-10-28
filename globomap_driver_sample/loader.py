@@ -38,13 +38,14 @@ class Loader(object):
             username=settings.GLOBOMAP_LOADER_API_USERNAME,
             password=settings.GLOBOMAP_LOADER_API_PASSWORD
         )
-        self.update = Update(auth=auth_inst, driver_name='')
+        Loader.update = Update(auth=auth_inst, driver_name='')
 
-    def send(self, data):
+    @staticmethod
+    def send(data):
         try:
-            res = self.update.post(data)
+            res = Loader.update.post(data)
         except Exception:
-            self.logger.exception('Message dont sent %s', json.dumps(data))
+            Loader.logger.exception('Message dont sent %s', json.dumps(data))
         else:
             return res
 
