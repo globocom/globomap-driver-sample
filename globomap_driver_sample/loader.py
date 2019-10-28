@@ -72,9 +72,13 @@ class Loader(object):
             pass
 
     def iterator_slice(self, iterator, length):
-        while True:
-            res = list(itertools.islice(iterator, length))
+        start = 0
+        end = length
 
+        while True:
+            res = list(itertools.islice(iterator, start, end))
+            start += length
+            end += length
             if not res:
                 break
             yield res
