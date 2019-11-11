@@ -30,8 +30,6 @@ class Driver(object):
     def __init__(self):
         self.session = Session()
 
-        self.timestamp = int(time())
-
     def get_data(self):
         # Sample method that retrieves data
 
@@ -68,7 +66,7 @@ class Driver(object):
             'id': _id,
             'name': data,
             'provider': 'sample',
-            'timestamp': self.timestamp
+            'timestamp': int(time())
         }
 
         return element
@@ -83,7 +81,7 @@ class Driver(object):
             'id': _id,
             'name': name,
             'provider': 'sample',
-            'timestamp': self.timestamp,
+            'timestamp': int(time()),
             'from': 'origin_collection/sample_{}'.format(_from),
             'to': 'destiny_collection/sample_{}'.format(_to)
         }
