@@ -88,6 +88,32 @@ class Driver(object):
 
         return element
 
+    def _add_properties(self, document, properties={}, properties_metadata=None):
+        # Adds properties to document 'document'
+        # 'properties' is a {'key': 'value'} dict
+        # 'properties_metadata' is a {'key': 'Key Name'} dict
+
+        if not properties:
+            return document
+        if not properties_metadata:
+            properties_metadata = {}
+        else:
+            new_properties_metadata = {}
+            for prop in properties_metadata:
+                new_properties_metadata[prop] = {
+                    "description": properties_metadata[prop]
+                }
+        for prop in [x for x in properties if x not in new_properties_metadata]:
+            new_properties_metadata[prop] = { "description": prop }
+        if 'properties' in document:
+            document['properties'].update(properties)
+            document['properties_metadata'].update(new_properties_metadata)
+        else:
+            document['properties'] = properties
+            document['properties_metadata'] = new_properties_metadata
+
+        return document
+
     # REQUEST
     def _make_request(self, uri):
         request_url = '{}'.format(uri)
