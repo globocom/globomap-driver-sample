@@ -38,7 +38,7 @@ class Loader(object):
             username=settings.GLOBOMAP_LOADER_API_USERNAME,
             password=settings.GLOBOMAP_LOADER_API_PASSWORD
         )
-        Loader.update = Update(auth=auth_inst, driver_name='')
+        Loader.update = Update(auth=auth_inst, driver_name='sample')
 
     @staticmethod
     def send(data):
@@ -60,16 +60,14 @@ class Loader(object):
 
     def run_clean(self, current_time):
         documents = [
-            clear('zabbix_graph', 'collections', current_time),
-            clear('zabbix_link', 'edges', current_time)
+            clear('sample_collection', 'collections', current_time),
+            clear('sample_edge', 'edges', current_time)
         ]
         self.send(documents)
 
     def run_workers(self, pool, data, length=100):
-
-        storage_cursor = self.driver.treat_data(data)
         for _ in pool.imap_unordered(
-                self.send, self.iterator_slice(storage_cursor, length)):
+                self.send, self.iterator_slice(data, length)):
             pass
 
     def iterator_slice(self, iterator, length):
