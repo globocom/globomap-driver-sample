@@ -43,7 +43,17 @@ class Loader(object):
     @staticmethod
     def send(data):
         try:
-            res = Loader.update.post(data)
+            for d in data:
+                if 'name' in d['element']:
+                    Loader.logger.info(
+                        'Sending message "%s on %s on %s"',
+                        d['action'], d['element']['name'], d['collection']
+                    )
+                else:
+                    Loader.logger.info(
+                        'Sending message "%s on %s"',
+                        d['action'], d['collection']
+                    )            res = Loader.update.post(data)
         except Exception:
             Loader.logger.exception('Message dont sent %s', json.dumps(data))
         else:
