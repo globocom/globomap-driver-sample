@@ -19,6 +19,7 @@ import logging
 from time import time
 from requests import Session
 
+from globomap_driver_sample.util import timed_logging
 from globomap_driver_sample.settings import SSL_VERIFY
 
 
@@ -30,8 +31,12 @@ class Driver(object):
     def __init__(self):
         self.session = Session()
 
+    @timed_logging
     def get_data(self):
         # Sample method that retrieves data
+        # Decorator measures how long the request took and logs the method call
+        # Methods that make requests via clients instead of _make_requests must
+        # use this decorator
 
         return {
             "Key1": "Value1",
@@ -115,7 +120,9 @@ class Driver(object):
         return document
 
     # REQUEST
+    @timed_logging
     def _make_request(self, uri):
+        # Decorator measures how long the request took and logs the method call
         request_url = '{}'.format(uri)
 
         try:

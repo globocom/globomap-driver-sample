@@ -14,6 +14,33 @@
    limitations under the License.
 """
 
+import datetime
+import logging
+
+
+def timed_logging(func, *args, **kwargs):
+    logger = logging.getLogger('timed_logging')
+
+    def inner_func(*args, **kwargs):
+        init_time = datetime.datetime.now()
+        ret = func(*args, **kwargs)
+        end_time = datetime.datetime.now()
+        duration = str(end_time - init_time)
+
+        strargs = str(args)
+        if len(strargs) > 500:
+            strargs = strargs[:245] + \
+                      " [...] " + \
+                      strargs[-245:]
+
+        logger.info(
+            'Function "%s" with args %s completed in %s',
+            func.__name__, strargs, duration
+        )
+
+        return ret
+    return inner_func
+
 
 def clear(collection, type, timestamp):
     data = {
