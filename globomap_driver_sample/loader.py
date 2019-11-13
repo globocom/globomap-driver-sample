@@ -67,9 +67,10 @@ class Loader(object):
     def run(self):
         current_time = int(time())
         data = self.driver.get_data()
+        payload = self.driver.treat_data(data)
 
         pool = multiprocessing.Pool(processes=settings.WORKERS)
-        self.run_workers(pool, data)
+        self.run_workers(pool, payload)
         self.run_clean(current_time)
         pool.close()
 

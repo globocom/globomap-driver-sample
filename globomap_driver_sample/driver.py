@@ -33,24 +33,44 @@ class Driver(object):
 
     @timed_logging
     def get_data(self):
-        # Sample method that retrieves data
+        # Sample method that retrieves data in the form of a list of dicts
         # Decorator measures how long the request took and logs the method call
         # Methods that make requests via clients instead of _make_requests must
         # use this decorator
 
-        return {
-            "Key1": "Value1",
-            "Key2": "Value2"
-        }
+        data = []
+
+        for i in range(1000):
+            name = f"data_{str(time())}"
+            data.append(
+                (name, {
+                    "Key1": "Value1",
+                    "Key2": "Value2"
+                })
+            )
+
+        return data
 
     def treat_data(self, data):
         # Sample method that parses data for loader's send method
 
-        doc = self._make_document(data['Key1'])
-        _id = hashlib.md5(bytes(str(data).lower(), 'utf-8')).hexdigest()
-        key = 'sample_{}'.format(_id)
-        data = self._make_data('sample_collection', 'collections', 'UPDATE', key, doc)
-        return data
+        to_send = []
+        for d in data:
+            metadata = properties_metadata={
+                            "Key1": "First Key",
+                            "Key2": "Second Key"
+                       }
+
+            doc = self._make_document(d[0])
+            _id = hashlib.md5(bytes(str(d[0]).lower(), 'utf-8')).hexdigest()
+            doc = self._add_properties(doc, properties=d[1],
+                                       properties_metadata=metadata)
+            key = 'sample_{}'.format(_id)
+            to_send.append(self._make_data(
+                'sample_collection', 'collections', 'UPDATE', key, doc)
+            )
+
+        return to_send
 
     # PREPARE PAYLOAD
     def _make_data(self, collection, kind, action, key, element=''):
