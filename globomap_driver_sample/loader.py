@@ -45,7 +45,7 @@ class Loader(object):
         for d in data:
             if 'name' in d['element']:
                 Loader.logger.info(
-                    'Sending message "%s on %s on %s"',
+                    'Sending message "%s %s on %s"',
                     d['action'], d['element']['name'], d['collection']
                 )
             else:
