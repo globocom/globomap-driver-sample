@@ -31,6 +31,9 @@ class Driver(object):
     def __init__(self):
         self.session = Session()
 
+    def __repr__(self):
+        return "globomap_driver_sample"
+
     @timed_logging
     def get_data(self):
         # Sample method that retrieves data in the form of a list of dicts
