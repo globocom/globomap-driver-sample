@@ -17,6 +17,7 @@ import itertools
 import json
 import logging
 import multiprocessing
+from datetime import datetime
 from time import time
 
 from globomap_loader_api_client import auth
@@ -24,7 +25,7 @@ from globomap_loader_api_client.update import Update
 
 from globomap_driver_sample import settings
 from globomap_driver_sample.driver import Driver
-from globomap_driver_sample.util import clear
+from globomap_driver_sample.util import clear, timed_logging
 
 
 class Loader(object):
@@ -64,7 +65,10 @@ class Loader(object):
         else:
             return res
 
+    @timed_logging
     def run(self):
+        Loader.logger.info('Driver %s started at %s',
+                            self.driver, datetime.now())
         current_time = int(time())
         data = self.driver.get_data()
         payload = self.driver.treat_data(data)
@@ -73,6 +77,8 @@ class Loader(object):
         self.run_workers(pool, payload)
         self.run_clean(current_time)
         pool.close()
+        Loader.logger.info('Driver %s ended at %s',
+                            self.driver, datetime.now())
 
     def run_clean(self, current_time):
         documents = [
