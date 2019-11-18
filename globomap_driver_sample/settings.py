@@ -38,7 +38,7 @@ LOGGING = {
     },
     'handlers': {
         'default': {
-            'level': 'WARNING',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
             'stream': 'ext://sys.stdout',
             'formatter': 'verbose',
@@ -52,7 +52,7 @@ LOGGING = {
     'loggers': {
         '': {
             'handlers': ['default', 'sentry'],
-            'level': 'WARNING',
+            'level': 'INFO',
             'propagate': True
         },
         'werkzeug': {'propagate': True},
