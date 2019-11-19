@@ -13,7 +13,7 @@ setup: ## Install project dependencies
 	@pip install -r $(PROJECT_HOME)/requirements_test.txt
 
 clean: ## Clear *.pyc files, etc
-	@rm -rf build dist *.egg-info
+	@rm -rf build dist *.egg-info .coverage
 	@find . \( -name '*.pyc' -o  -name '__pycache__' -o -name '**/*.pyc' -o -name '*~' \) -delete
 
 tests: clean ## Make tests
