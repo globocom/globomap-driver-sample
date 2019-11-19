@@ -43,6 +43,8 @@ class Loader(object):
 
     @timed_logging
     def globomap_loader_post(data):
+        if type(data) is dict:
+            data = [data]
         for d in data:
             if 'name' in d['element']:
                 Loader.logger.info(
