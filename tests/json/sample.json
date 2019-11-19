@@ -1,0 +1,22 @@
+[
+  {
+    "collection": "sample_collection",
+    "type": "collections",
+    "action": "UPDATE",
+    "element": {
+      "properties": {
+        "Key1": "Value1",
+        "Key2": "Value2"
+      },
+      "properties_metadata": {
+        "Key1": "First Key",
+        "Key2": "Second Key"
+      },
+      "provider": "sample",
+      "timestamp": 123456789,
+      "name": "data_123456789",
+      "id": "data_123456789"
+    },
+    "key": "sample/data_123456789"
+  }
+]

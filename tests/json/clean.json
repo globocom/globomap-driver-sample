@@ -1,0 +1,28 @@
+[{
+    "action": "CLEAR",
+    "collection": "sample_collection",
+    "element": [
+        [
+            {
+                "field": "timestamp",
+                "operator": "<",
+                "value": 123456789
+            }
+        ]
+    ],
+    "type": "collections"
+},
+{
+    "action": "CLEAR",
+    "collection": "sample_edge",
+    "element": [
+        [
+            {
+                "field": "timestamp",
+                "operator": "<",
+                "value": 123456789
+            }
+        ]
+    ],
+    "type": "edges"
+}]

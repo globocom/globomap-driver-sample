@@ -22,6 +22,6 @@ tests: clean ## Make tests
 tests_ci: clean ## Make tests to CI
 	@nosetests --verbose --rednose  --nocapture --cover-package=globomap_driver_sample
 
-clone:
-	@mkdir /tmp/bk; cd ../; cp -R globomap-driver-sample/ /tmp/bk/; cd /tmp/bk; mv globomap_driver_sample $(package); rm -rf .git/; sed -i .bak "s/globomap_driver_sample/$(package)/g" ./scheduler.py; sed -i .bak "s/globomap_driver_sample/$(package)/g" ./run_loader.py; sed -i .bak "s/globomap_driver_sample/$(package)/g" ./$(package)/loader.py; sed -i .bak "s/globomap_driver_sample/$(package)/g" ./$(package)/driver.py; sed -i .bak "s/globomap_driver_sample/$(package)/g" Makefile; sed -i .bak 's/Makefile for globomap-driver-sample/Makefile for $(package)/g' Makefile; rm -rf *.bak; rm -rf $(package)/*.bak;
+clone: clean ## Make new driver project
+	@mkdir /tmp/bk; cd ../; cp -R globomap-driver-sample/ /tmp/bk/; cd /tmp/bk; mv globomap_driver_sample $(package); rm -rf .git/; sed -i .bak "s/globomap_driver_sample/$(package)/g" ./scheduler.py; sed -i .bak "s/globomap_driver_sample/$(package)/g" ./run_loader.py; sed -i .bak "s/globomap_driver_sample/$(package)/g" ./$(package)/loader.py; sed -i .bak "s/globomap_driver_sample/$(package)/g" ./tests/loader_test.py; sed -i .bak "s/globomap_driver_sample/$(package)/g" ./$(package)/driver.py; sed -i .bak "s/globomap_driver_sample/$(package)/g" Makefile; sed -i .bak 's/Makefile for globomap-driver-sample/Makefile for $(package)/g' Makefile; rm -rf *.bak; rm -rf $(package)/*.bak; rm -rf tests/*.bak;
 	@mv /tmp/bk/ ../$(project)/; rm -rf /tmp/bk/
